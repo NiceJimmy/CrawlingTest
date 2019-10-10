@@ -70,11 +70,10 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             try {
                 Document doc = Jsoup.connect("https://movie.naver.com/movie/running/current.nhn").get();
-                Elements mElementDataSize = doc.select("ul[class=lst_detail_t1]").select("li"); //필요한 녀석만 꼬집어서 지정
-                int mElementSize = mElementDataSize.size(); //목록이 몇개인지 알아낸다. 그만큼 루프를 돌려야 하나깐.
+                Elements mElementDataSize = doc.select("ul[class=lst_detail_t1]").select("li");
+                int mElementSize = mElementDataSize.size();
 
-                for(Element elem : mElementDataSize){ //이렇게 요긴한 기능이
-                    //영화목록 <li> 에서 다시 원하는 데이터를 추출해 낸다.
+                for(Element elem : mElementDataSize){
                     String my_title = elem.select("li dt[class=tit] a").text();
                     String my_imgUrl = elem.select("li div[class=thumb] a img").attr("src");
                     dataList.add(new CustomDataClass(my_title, my_imgUrl));
